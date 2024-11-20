@@ -28,19 +28,25 @@ public class Reservation {
     @NotBlank
     private String arrivalCity;
 
+    @ManyToOne
+    @JoinColumn(name = "ticket_type_id")
+    private TicketType ticketType;
+
 
     public Reservation() {
     }
 
-    public Reservation(String ticketReference, String passengerName, LocalDateTime departureDateTime, String departureCity, String arrivalCity) {
+    public Reservation(String ticketReference, String passengerName, LocalDateTime departureDateTime,
+                       String departureCity, String arrivalCity, TicketType ticketType) {
         this.ticketReference = ticketReference;
         this.passengerName = passengerName;
         this.departureDateTime = departureDateTime;
         this.departureCity = departureCity;
         this.arrivalCity = arrivalCity;
+        this.ticketType = ticketType;
     }
 
-    // Getters et Setters
+
     public Long getId() {
         return id;
     }
@@ -89,16 +95,11 @@ public class Reservation {
         this.arrivalCity = arrivalCity;
     }
 
+    public TicketType getTicketType() {
+        return ticketType;
+    }
 
-    @Override
-    public String toString() {
-        return "Reservation{" +
-                "id=" + id +
-                ", ticketReference='" + ticketReference + '\'' +
-                ", passengerName='" + passengerName + '\'' +
-                ", departureDateTime=" + departureDateTime +
-                ", departureCity='" + departureCity + '\'' +
-                ", arrivalCity='" + arrivalCity + '\'' +
-                '}';
+    public void setTicketType(TicketType ticketType) {
+        this.ticketType = ticketType;
     }
 }
